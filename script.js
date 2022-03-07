@@ -62,43 +62,94 @@ while (quant % 2 != 0 || quant > 18 || quant < 6) {
 }
 
 
-// criação do board
-function createBoard(n) {
+
+
+// gerando vetor para cartas aleatórias, não embaralhadas
+
+    // função que gera um número aleatório não repetido no vetor
+function generateRandom(chosen) {
+    let random = parseInt(Math.random() * 9)
+    return chosen.includes(random) ? generateRandom(chosen) : random
+}
+
+    // função que cria o vetor e adiciona dois números, que representa as cartas
+function generateNums(qtde) {
+    let nums = Array(qtde).fill(0).reduce((nums) => {
+        let newNum = generateRandom(nums)
+        return [...nums, newNum, newNum]
+    }, [])
+    return nums
+}
+
+
+// embaralhando os lugares das cartas no vetor acima, com a função Fisher Yates
+
+function fisherYatesShuffle(arr){
+    for(var i =arr.length-1 ; i>0 ;i--){
+        var j = Math.floor( Math.random() * (i + 1) );
+        [arr[i],arr[j]]=[arr[j],arr[i]];
+    }
+}
+let chosenRandom = []
+chosenRandom = generateNums(quant/2)
+fisherYatesShuffle(chosenRandom)
+
+console.log(chosenRandom)
+
+
+
+// criação do board, com as cartas aleatórias
+
+
+function createBoard(n, arr) {
     for (let i = 0; i < n; i++) {
+        // criando a div que representa a carta
         let card = document.createElement('div')
         card.classList.add('cards')
         card.setAttribute('data-id', i)
+
+        // criando a back-face da carta
         let imgBlank = document.createElement('img')
         imgBlank.setAttribute('src', './imgs/back-face.png')
         imgBlank.classList.add('back-face')
+
+        // criando a front-face da carta
+        let imgFront = document.createElement('img')
+        imgFront.setAttribute('src', cardArray[arr[i]].img)
+        imgFront.classList.add('front-face')
+
         memoryGame.appendChild(card)
         card.appendChild(imgBlank)
+        card.appendChild(imgFront)
     }
 }
-createBoard(quant)
+
+createBoard(quant, chosenRandom)
 
 
-let chosen = []
-function aleatorio() {
-    let random = parseInt(Math.random() * 9)
-    console.log(random)   
-}
-
-
-// gerando cartas em posições aleatórias
-function bla() {
-    let frontFace = document.createElement('img')
-    frontFace.setAttribute('src', '') //aa?
-    card.appendChild(frontFace)
-}
 
 // flip das cartas
 const cards = document.querySelectorAll('.cards')
+let hasFliped = false
+let firstCard, secondCard
 
 function flipCard() {
     /* console.log('teste')
     console.log(this) */
-    this.classList.toggle('flip')
+    this.classList.add('flip')
+
+    if(!hasFliped) {
+        hasFliped = true
+        firstCard = this
+    } else {
+
+    }
 }
 
 cards.forEach(e => e.addEventListener("click", flipCard))
+
+
+// match de cartas
+
+
+
