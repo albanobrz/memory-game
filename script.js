@@ -64,8 +64,8 @@ while (quant % 2 != 0 || quant > 18 || quant < 6) {
 
 
 
-// gerando vetor para cartas aleatórias, não embaralhadas
 
+// gerando vetor para cartas aleatórias, não embaralhadas
 // função que gera um número aleatório não repetido no vetor
 function generateRandom(chosen) {
     let random = parseInt(Math.random() * 9)
@@ -164,10 +164,13 @@ function disableCards() {
     secondCard.removeEventListener('click', flipCard)
     cont++
 
-    if (cont == quant/2) {
+    if (cont == quant / 2) {
         endmsg.classList.remove('hidden')
+        cont = 0
     }
 }
+
+
 
 // quando não é match, volta as duas cartas
 function unflipCards() {
@@ -181,6 +184,8 @@ function unflipCards() {
     }, 1000)
 }
 
+
+
 // verifica match
 function checkForMatch() {
     let match = firstCard.dataset.framework === secondCard.dataset.framework
@@ -188,19 +193,37 @@ function checkForMatch() {
     match ? disableCards() : unflipCards()
 }
 
+
+
 // adiciona event listener pra cada div
 cards.forEach(e => e.addEventListener("click", flipCard))
 
+
+
+
 // botão para dar reload, depois que acha todos os pares (tentar dar uma função de refresh board, ao inves de recarregar a pag)
-const playAgain = document.querySelector('.play-again')
+
 const oldBoard = document.querySelector('.memory-game')
-playAgain.addEventListener('click', function() {
+const playAgain = document.querySelector('.play-again')
+
+playAgain.addEventListener('click', function () {
+
+    /* location.reload() */
     endmsg.classList.add('hidden')
     console.log('refresh')
     var element = document.querySelector('.memory-game')
     while (element.firstChild) {
         element.removeChild(element.firstChild)
     }
-    
+    chosenRandom = generateNums(quant / 2)
+    fisherYatesShuffle(chosenRandom)
+
+    console.log(chosenRandom)
+    hasFlippedCard = false
+    lockBoard = false
     createBoard(quant, chosenRandom)
+
+    const cards = document.querySelectorAll('.cards')
+    cards.forEach(e => e.addEventListener("click", flipCard))
+    
 })
