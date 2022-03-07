@@ -1,9 +1,3 @@
-/* no html coloca todas as cartas
-faz um vetor aqui pra gerar numeros aleatorios 
-adiciona a classe pra deixar invisivel as cartas que nao forem pra jogar
-programa um tabuleiro preparado pra todas as cartas
- */
-
 const cardArray = [
     {
         id: 0,
@@ -55,6 +49,7 @@ const cardArray = [
 const memoryGame = document.querySelector('.memory-game')
 let quant = prompt('Digite quantas cartas deseja jogar (numero par, de 6 à 18)')
 
+
 // numero de cartas que o usuário quer
 while (quant % 2 != 0 || quant > 18 || quant < 6) {
     alert('Digite um número par, entre 6 e 18')
@@ -62,17 +57,17 @@ while (quant % 2 != 0 || quant > 18 || quant < 6) {
 }
 
 
-
-
-
 // gerando vetor para cartas aleatórias, não embaralhadas
 // função que gera um número aleatório não repetido no vetor
+
 function generateRandom(chosen) {
     let random = parseInt(Math.random() * 9)
     return chosen.includes(random) ? generateRandom(chosen) : random
 }
 
+
 // função que cria o vetor e adiciona dois números, que representa as cartas
+
 function generateNums(qtde) {
     let nums = Array(qtde).fill(0).reduce((nums) => {
         let newNum = generateRandom(nums)
@@ -93,13 +88,10 @@ function fisherYatesShuffle(arr) {
 let chosenRandom = []
 chosenRandom = generateNums(quant / 2)
 fisherYatesShuffle(chosenRandom)
-
 console.log(chosenRandom)
 
 
-
 // criação do board, com as cartas aleatórias
-
 
 function createBoard(n, arr) {
     for (let i = 0; i < n; i++) {
@@ -123,9 +115,7 @@ function createBoard(n, arr) {
         card.appendChild(imgFront)
     }
 }
-
 createBoard(quant, chosenRandom)
-
 
 
 // flip das cartas
@@ -135,7 +125,6 @@ const cards = document.querySelectorAll('.cards')
 let hasFlippedCard = false
 let lockBoard = false
 let firstCard, secondCard
-
 
 function flipCard() {
     if (lockBoard) return // tira bug de clicar rapido
@@ -156,9 +145,12 @@ function flipCard() {
     checkForMatch()
 }
 
-// quando da match, desativa as cartas
+
+// quando der match, desativa as cartas
+
 let cont = 0
 let endmsg = document.querySelector('.overlay')
+
 function disableCards() {
     firstCard.removeEventListener('click', flipCard)
     secondCard.removeEventListener('click', flipCard)
@@ -172,8 +164,8 @@ function disableCards() {
 }
 
 
-
 // quando não é match, volta as duas cartas
+
 function unflipCards() {
     lockBoard = true
 
@@ -186,8 +178,8 @@ function unflipCards() {
 }
 
 
-
 // verifica match
+
 function checkForMatch() {
     let match = firstCard.dataset.framework === secondCard.dataset.framework
 
@@ -195,11 +187,9 @@ function checkForMatch() {
 }
 
 
-
 // adiciona event listener pra cada div
+
 cards.forEach(e => e.addEventListener("click", flipCard))
-
-
 
 
 // botão para dar reload, gerando novos números e posições aleatórias
@@ -225,5 +215,4 @@ playAgain.addEventListener('click', function () {
 
     const cards = document.querySelectorAll('.cards')
     cards.forEach(e => e.addEventListener("click", flipCard))
-    
 })

@@ -28,20 +28,29 @@ h1 {
     margin-bottom: 0;
     text-align: center;
     font-size: 3.8em;
-    border-bottom: solid white 1px;
-    padding-bottom: 30px;
     width: 900px;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 10px;
 }
 
 h2 {
     position: relative;
     text-align: center;
-    font-size: 60px;
+    font-size: 70px;
     transition: 0.5s;
     justify-content: center;
     vertical-align: middle;
+}
+
+h3 {
+    text-align: center;
+    width: 900px;
+    border-bottom: solid white 1px;
+    font-size: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
 }
 
 .memory-game {
@@ -91,14 +100,14 @@ h2 {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
     color: white;
     justify-content: center;
     transition: 0.5s;
-    gap: 15em;
+    gap: 25em;
 }
 
 button {
