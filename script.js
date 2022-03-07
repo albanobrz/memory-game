@@ -66,13 +66,13 @@ while (quant % 2 != 0 || quant > 18 || quant < 6) {
 
 // gerando vetor para cartas aleatórias, não embaralhadas
 
-    // função que gera um número aleatório não repetido no vetor
+// função que gera um número aleatório não repetido no vetor
 function generateRandom(chosen) {
     let random = parseInt(Math.random() * 9)
     return chosen.includes(random) ? generateRandom(chosen) : random
 }
 
-    // função que cria o vetor e adiciona dois números, que representa as cartas
+// função que cria o vetor e adiciona dois números, que representa as cartas
 function generateNums(qtde) {
     let nums = Array(qtde).fill(0).reduce((nums) => {
         let newNum = generateRandom(nums)
@@ -84,14 +84,14 @@ function generateNums(qtde) {
 
 // embaralhando os lugares das cartas no vetor acima, com a função Fisher Yates
 
-function fisherYatesShuffle(arr){
-    for(var i =arr.length-1 ; i>0 ;i--){
-        var j = Math.floor( Math.random() * (i + 1) );
-        [arr[i],arr[j]]=[arr[j],arr[i]];
+function fisherYatesShuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
     }
 }
 let chosenRandom = []
-chosenRandom = generateNums(quant/2)
+chosenRandom = generateNums(quant / 2)
 fisherYatesShuffle(chosenRandom)
 
 console.log(chosenRandom)
@@ -106,7 +106,7 @@ function createBoard(n, arr) {
         // criando a div que representa a carta
         let card = document.createElement('div')
         card.classList.add('cards')
-        card.setAttribute('data-id', i)
+        card.setAttribute('data-framework', cardArray[arr[i]].name)
 
         // criando a back-face da carta
         let imgBlank = document.createElement('img')
@@ -129,27 +129,78 @@ createBoard(quant, chosenRandom)
 
 
 // flip das cartas
+
 const cards = document.querySelectorAll('.cards')
-let hasFliped = false
+
+let hasFlippedCard = false
+let lockBoard = false
 let firstCard, secondCard
 
+
 function flipCard() {
-    /* console.log('teste')
-    console.log(this) */
+    if (lockBoard) return // tirar bug de clicar rapido
+    if (this === firstCard) return // tirar bug de double click
+
     this.classList.add('flip')
 
-    if(!hasFliped) {
-        hasFliped = true
+    // pega a primeira e segunda carta
+    if (hasFlippedCard == false) {
+        hasFlippedCard = true
         firstCard = this
-    } else {
+        return
+    }
 
+    hasFlippedCard = false
+    secondCard = this
+
+    checkForMatch()
+}
+
+// quando da match, desativa as cartas
+let cont = 0
+let endmsg = document.querySelector('.overlay')
+function disableCards() {
+    firstCard.removeEventListener('click', flipCard)
+    secondCard.removeEventListener('click', flipCard)
+    cont++
+
+    if (cont == quant/2) {
+        endmsg.classList.remove('hidden')
     }
 }
 
+// quando não é match, volta as duas cartas
+function unflipCards() {
+    lockBoard = true
+
+    setTimeout(() => {
+        firstCard.classList.remove('flip')
+        secondCard.classList.remove('flip')
+
+        lockBoard = false
+    }, 1000)
+}
+
+// verifica match
+function checkForMatch() {
+    let match = firstCard.dataset.framework === secondCard.dataset.framework
+
+    match ? disableCards() : unflipCards()
+}
+
+// adiciona event listener pra cada div
 cards.forEach(e => e.addEventListener("click", flipCard))
 
-
-// match de cartas
-
-
-
+// botão para dar reload, depois que acha todos os pares (tentar dar uma função de refresh board, ao inves de recarregar a pag)
+const playAgain = document.querySelector('.play-again')
+const oldBoard = document.querySelector('.memory-game')
+playAgain.addEventListener('click', function() {
+    endmsg.classList.add('hidden')
+    console.log('refresh')
+    var element = document.querySelector('.memory-game')
+    while (element.firstChild) {
+        element.removeChild(element.firstChild)
+    }
+    
+    createBoard(quant, chosenRandom)
+})
