@@ -60,6 +60,7 @@ h3 {
     flex-wrap: wrap;
     margin: auto;
     perspective: 1000px;
+    padding-bottom: 3px;
 }
 
 .cards {
