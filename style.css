@@ -41,6 +41,7 @@ h2 {
     transition: 0.5s;
     justify-content: center;
     vertical-align: middle;
+    position: relative;
 }
 
 h3 {
@@ -61,6 +62,14 @@ h3 {
     margin: auto;
     perspective: 1000px;
     padding-bottom: 3px;
+}
+
+.number-plays {
+    font-size: 30px;
+}
+
+.overlay h2:nth-child(2) {
+    flex-shrink: 1;
 }
 
 .cards {
@@ -108,7 +117,7 @@ h3 {
     color: white;
     justify-content: center;
     transition: 0.5s;
-    gap: 25em;
+    gap: 13em;
 }
 
 button {
