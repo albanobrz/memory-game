@@ -154,7 +154,7 @@ function disableCards() {
     // if para abrir o overlay para dar reset quando acaba de achar os pares
     if (cont == quant / 2) {
         endmsg.classList.remove('hidden')
-        numberPlays.innerHTML = `Você terminou o jogo em ${plays} jogadas`
+        numberPlays.innerHTML = `Você terminou o jogo em ${plays + 1} jogadas`
         cont = 0
     }
 }
@@ -191,8 +191,9 @@ cards.forEach(e => e.addEventListener("click", flipCard))
 const oldBoard = document.querySelector('.memory-game')
 const playAgain = document.querySelector('.play-again')
 
-playAgain.addEventListener('click', function () {
+playAgain.addEventListener('click', newBoard)
 
+function newBoard() {
     endmsg.classList.add('hidden')
     console.log('refresh')
     var element = document.querySelector('.memory-game')
@@ -210,4 +211,23 @@ playAgain.addEventListener('click', function () {
 
     const cards = document.querySelectorAll('.cards')
     cards.forEach(e => e.addEventListener("click", flipCard))
-})
+}
+
+
+// botão para atualizar o número de cartas sendo jogadas
+let changeBtn = document.querySelector('.change-btn')
+changeBtn.addEventListener('click', changeQuant)
+
+function changeQuant() {
+    let newQuant = document.querySelector('#new-quant')
+    let quantValue = newQuant.value
+
+    plays = 0
+    cont = 0
+    if (quantValue % 2 != 0 || quantValue > 18 || quantValue < 6) {
+        return
+    } else {
+        quant = quantValue
+        newBoard()
+    }
+}
