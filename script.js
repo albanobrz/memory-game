@@ -169,6 +169,7 @@ function unflipCards() {
         secondCard.classList.remove('flip')
 
         lockBoard = false
+        firstCard = null
     }, 1000)
 }
 
