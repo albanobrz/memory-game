@@ -43,6 +43,26 @@ const cardArray = [
         id: 8,
         img: './imgs/tomioka.png',
         name: 'tomioka'
+    },
+    {
+        id: 9,
+        img: './imgs/daki.png',
+        name: 'daki'
+    },
+    {
+        id: 10,
+        img: './imgs/gyutaro.webp',
+        name: 'gyutaro'
+    },
+    {
+        id: 11,
+        img: './imgs/akaza.webp',
+        name: 'akaza'
+    },
+    {
+        id: 12,
+        img: './imgs/shinobu.webp',
+        name: 'shinobu'
     }
 ]
 
@@ -60,7 +80,7 @@ while (quant % 2 != 0 || quant > 18 || quant < 6) {
 // gerando vetor para cartas aleatórias, não embaralhadas
 // função que gera um número aleatório não repetido no vetor
 function generateRandom(chosen) {
-    let random = parseInt(Math.random() * 9)
+    let random = parseInt(Math.random() * 13)
     return chosen.includes(random) ? generateRandom(chosen) : random
 }
 
