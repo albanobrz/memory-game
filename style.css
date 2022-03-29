@@ -160,3 +160,8 @@ button:hover {
 .change-btn {
     height: 50px;
 }
+
+#new-quant {
+    height: 26px;
+    font-size: 1.4rem;
+}
