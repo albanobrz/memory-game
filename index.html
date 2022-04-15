@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,25 +9,33 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="imgs/nezuko.png" type="image/x-icon">
 </head>
+
 <body>
-    <h1>Jogo da memória</h1>
-    <h3>Demon Slayer</h3>
+    <header>
+        <div class="change-cards">
+            <h4>Número de cartas:</h4>
+            <input type="number" name="cards" id="new-quant" min="6" max="18" step="2" placeholder="6 à 18">
+            <button class="change-btn">Atualizar</button>
+        </div>
+        <div class="header-text">
+            <h1>Jogo da memória</h1>
+            
+        </div>
+    </header>
+    <h3></h3>
 
     <section class="memory-game"></section>
-    <div class="change-cards">
-        <h4>Número de cartas:</h4>
-        <input type="number" name="cards" id="new-quant" min="6" max="18" step="2">
-        <button class="change-btn">Atualizar</button>
-    </div>
+
 
     <div class="overlay hidden" id="end-msg">
         <h2><strong>Parabéns !!</strong> Você descobriu todas as cartas :)</h2>
         <h2 class="number-plays"></h2>
         <button class="play-again">Jogar Novamente</button>
     </div>
-    
+
 
 
     <script src="./script.js"></script>
 </body>
+
 </html>
