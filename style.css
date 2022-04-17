@@ -176,17 +176,46 @@ button:hover {
 }
 
 @media screen and (max-width: 918px) {
+    h4, h1 {
+        display: none;
+    }
+
     header {
-        width: auto;
-        gap: 20vw;
+        width: 100%;
+        gap: 0;
+        justify-content: center;
+    }
+
+    h2 {
+        font-size: 2.8rem;
     }
 
     h3 {
         width: 90vw;
         bottom: 50px;
     }
+   
+    .back-face:hover {
+        border: none;
+    }
 
-    h4 {
-        display: none;
+    body {
+        width: 100vw;
+        height: 100vh;
+        background: rgb(53, 45, 45);
+    }
+
+    .memory-game {
+        width: 95vw;
+        height: 75vh;
+    }
+
+    .cards {
+        width: calc(33.3% - 10px);
+        height: calc(28% - 10px);  /* tirar o -10px deixa o jogo desalinhado IMPORTANTE */
+    }
+
+    .change-cards {
+        margin-left: 0px;
     }
 } 
