@@ -208,6 +208,7 @@ button:hover {
     .memory-game {
         width: 95vw;
         height: 75vh;
+        margin-top: 25px;
     }
 
     .cards {
@@ -219,3 +220,10 @@ button:hover {
         margin-left: 0px;
     }
 } 
+
+/* para monitores com pouco pixel de altura */
+@media screen and (max-height: 765px) {
+    .memory-game { 
+        margin-top: 25px;
+    }
+}
