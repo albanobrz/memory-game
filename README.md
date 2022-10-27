@@ -1,4 +1,4 @@
-<h1>Kimetsu no Yaiba Memory Game</h1>
+# Kimetsu no Yaiba Memory Game
 
 - interactive game, where the user inputs the number of cards
 - cards generated randomly
